@@ -34,11 +34,15 @@ const adjacent_keys = {
     'n': ['h', 'j', 'b', 'm'],
     'm': ['j', 'k', 'n']}
 
-function findAdjacentKeys(oneLetter) {
+function findAdjacentKeys(oneLetter, checkedLetters) {
     /* Find adjacent letters given a letter key */
+    /* Add argument for already serached letters, to reduce search  */
     let adjLetters = []
-    if (adjacent_keys.hasOwnProperty(oneLetter)) {
-            let adjLetters = adjacent_keys[oneLetter]
+    if (adjacent_keys.hasOwnProperty(oneLetter)) { // If values for key-value exists
+            let adjLetters = adjacent_keys[oneLetter] // adjLetters == value of letter key
+            if (!checkedLetters) { // Check if checkedLetters != null
+                
+            }
             console.log(oneLetter + ": adj ->" + adjLetters);
             return adjLetters
         }
@@ -50,7 +54,7 @@ function pathToLetter (name) {
     const start = nameLetters[0];
     const dest = nameLetters.slice(-1);
     console.log(`Starting Letter: ${start}`);
-    console.log(`Target Letter: ${dest}`);
+    console.log(`End Letter: ${dest}`);
 
     for (let i = 0; i < nLL; i++) {
         let nextLetter = nameLetters[i+1] // Define next letter of name
@@ -60,11 +64,20 @@ function pathToLetter (name) {
             console.log(`${nextLetter} adjacent to ${nameLetters[i]}`)
         } else {
             console.log(`Expand search for ${nextLetter} children of ${nameLetters[i]}`);
+            let lettersToSearch = []
+            searchedLetters.push()
+            // Look at the adjacent letters for /* name[i] */
+            // If letter name[i+1] is within adjacent letters (name[i+1] : adjacent), then have found next letter
+            // If not, then look at all the children letters of the oringal letters
+            // Keep track of sequence of all letters that have looked out, without loking at previous letters found in adjacent groups 
+            // Once found letter, track back to original letter the shortest path to find that letter  */
         }
     } 
 }
 
-pathToLetter('Sam');
+findAdjacentKeys('a');
+
+//pathToLetter('Sam');
 
 // For each letter in the name
 // Beginning Letter of the name, name[i]
@@ -80,7 +93,8 @@ pathToLetter('Sam');
 /* Code written in python
 
 
-def adjacent(word): Python Code
+
+/* def adjacent(word): Python Code
     for i in range(len(word)-1):  # Iterate over each letter of the word
         print('Checking letter ' + word[i] + '...', end='')
         findAdjacentKeys(letter[i])
