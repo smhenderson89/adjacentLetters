@@ -104,8 +104,9 @@ function adjacentLetters (letterA) {
 }
 
 // Function that inputs a letter, returns the X/Y coordinate of that letter based on the gridKey matrix
+// TODO: LetterPosition not returning coordinate properly
 function letterPosition (letter) {
-    coordinate = gridKey[letter.toUpperCase()]
+    coordinate = gridKey[(letter.toUpperCase())]
     return coordinate
 }
 
@@ -156,6 +157,13 @@ function testMoving (start, end) {
     // Loop to move to another letter
     let currentLetter = start;
 
+    // Look at adjacent letters and corresponding moves
+    let moveValueArray = [];
+    let adjacencyLetters = adjacentLetters(start)
+    for (i in adjacencyLetters) {
+        console.log(adjacencyLetters[i], letterPosition[adjacencyLetters[i]])
+    }
+
     // Given difference in row/column, look for letters that help accomplish a move towards target coordinate
     //      Look at adjacent letters, are there any that are bad choices/ don't move closer to goal?
     //      Elminate those choices from the possible options
@@ -168,7 +176,10 @@ function testMoving (start, end) {
 
 }
 
-testMoving('e', 'x');
+console.log(gridKey['A']);
+console.log(letterPosition['a']);
+
+testMoving('q', 'd');
 // console.log(testAdjacent('s','o'));
 
 // return all adjacent letters to a leter
@@ -178,7 +189,7 @@ testMoving('e', 'x');
 //console.log(letterPosition('A'));
 
 // Test for value of letter given a coordinate
-letterFromGridValue(2, 2);
+// letterFromGridValue(2, 2);
 
 /* 
 Algorithm for finding adjacent keys
