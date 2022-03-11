@@ -58,6 +58,34 @@ const gridKey = {
     'Z' : [1, 1]
 }
 
+const letterKey = {
+    '2, 1' : 'A',
+    '1, 5' : 'B',
+    '1, 3' : 'C',
+    '2, 3' : 'D',
+    '3, 3' : 'E',
+    '2, 4' : 'F',
+    '2, 5' : 'G',
+    '2, 6' : 'H',
+    '3, 8' : 'I',
+    '2, 7' : 'J',
+    '2, 8' : 'K',
+    '2, 9' : 'L',
+    '1, 7' : 'M',
+    '1, 6' : 'N',
+    '3, 9' : 'O',
+    '3, 10' : 'P',
+    '3, 1' : 'Q',
+    '3, 4' : 'R',
+    '2, 2' : 'S',
+    '3, 5' : 'T',
+    '1, 4' : 'V',
+    '3, 2' : 'W',
+    '1, 2' : 'X',
+    '3, 6' : 'Y',
+    '1, 1' : 'Z'
+}
+
 // TODO: Find list of all names in the US
 
 /* console.log(matrixKey[0][25]); 
@@ -103,29 +131,23 @@ function adjacentLetters (letterA) {
     return letterArray
 }
 
-// Function that inputs a letter, returns the X/Y coordinate of that letter based on the gridKey matrix
-// TODO: LetterPosition not returning coordinate properly
-function letterPosition (letter) {
-    coordinate = gridKey[(letter.toUpperCase())]
+/* Function that inputs a letter, returns the X/Y coordinate of 
+that letter based on the gridKey matrix */
+function letterPosition (letterInput) {
+    // console.log('Letter Position input: ' + letterInput);
+    coordinate = gridKey[(letterInput.toUpperCase())]
     return coordinate
 }
 
-// Funciton that given an [x, y] array of an letter, returns the correspond letter from the key-value pair
+/* Funciton that given an [x, y] array of an letter, 
+returns the correspond letter from the key-value pair */
 function letterFromGridValue (x, y) {
-    // console.log('X:' + x + ' Y:' + y);
-    const targetArray = [x, y]
-    // console.log('Target Array: ' + targetArray);
-    for (var key in gridKey) {
-        output = gridKey[key]
-        outputX = output[0];
-        outputY = output[1];
-        // console.log(outputX, outputY);
-        if (outputX == x && outputY == y) {
-            // console.log('found key');
-            console.log(key)
-        }
-    }
+    // console.log('Input: ' + `${x}` + ', ' + `${y}`);
+    outputLetter = letterKey[`${x}, ${y}`]
+    return outputLetter 
 }
+
+// Function that 
 
 testName = 'fred';
 
@@ -133,12 +155,12 @@ function testMoving (start, end) {
     console.log('Start Letter: ' + start + ' to End Letter: ' + end);
     // Look at starting and end letter 
     // If difference, see how many moves would be needed to move over to the target grid
-    startXY = letterPosition(start)
-    startRow = startXY[0]; 
-    startCol = startXY[1];
-    endXY = letterPosition(end)
-    endRow = endXY[0];
-    endCol = endXY[1];
+    let startXY = letterPosition(start)
+    let startRow = startXY[0]; 
+    let startCol = startXY[1];
+    let endXY = letterPosition(end)
+    let endRow = endXY[0];
+    let endCol = endXY[1];
 
     /* positive is right and up, negative is down and left */
     diffRow = endRow - startRow
@@ -172,14 +194,58 @@ function testMoving (start, end) {
     //              Take absolute difference in coordinates between, which letter will maximize the distance
     //              Else if multiple options exist, take the first option
     //      Repeat until have reached the end letter, record path
-
-
 }
 
-console.log(gridKey['A']);
-console.log(letterPosition['a']);
+// Class Node
 
-testMoving('q', 'd');
+
+function aStarPath(start, end) {
+    // https://www.geeksforgeeks.org/a-search-algorithm/
+    // https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
+    // https://www.youtube.com/watch?v=-L-WgKMFuhE&ab_channel=SebastianLague
+
+    /* 
+        G cost = distance from the starting node
+        H cost (heuristic) = distance from end node
+        F cost = G cost + H cost
+
+        OPEN // the set of nodes to be evaluated
+        CLOSED / the set of nodes already evaluated
+        add the start node to the OPEN
+
+        loop
+            CURRENT = node in OPEN with the lowest f_cost
+            remove CURRENT from OPEN
+            add CURRENT to CLOSED
+
+            if CURRENT is the target node // path has been found
+                return 
+
+            for each NEIGHBOR of the CURRENT node
+                if NEIGHBOR is not traversable OR NEIGHBOR is in CLOSED
+                    skip to to the next NEIGHBOR
+
+                if new path to NEIGHBOR is shorter OR NEIGHBOR is not in OPEN
+                    set f_cost OF NEIGHBOR
+                    set parent of NEIGHBOR to CURRENT
+                    if NEIGHBOR is not in OPEN
+                        add NEIGHBOR to OPEN
+
+    */
+}
+
+
+// TESTING COMMANDS
+
+
+// Testing grid location of a letter
+console.log(letterPosition('a'));
+
+// Test letter location to determine grid
+console.log(letterFromGridValue(2, 1))
+
+// Testing moving path from one letter position to the other
+// testMoving('q', 'd');
 // console.log(testAdjacent('s','o'));
 
 // return all adjacent letters to a leter
