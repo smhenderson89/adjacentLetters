@@ -156,6 +156,17 @@ function heuristic (a, b) {
     return d
 }
 
+/* Function that takes input array and remoes an element from the array
+and retains the rest of the elements*/
+
+function removeFromArray(arr, elt) {
+    for (var i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] = elt) {
+            arr.splice(i, 1);
+        }
+    }
+}
+
 testName = 'fred';
 
 function testMoving (start, end) {
@@ -204,10 +215,13 @@ function testMoving (start, end) {
 }
 
 // Class Node
-function Spot () {
+function Spot (i, j) {
+    this.x = i;
+    this.y = j;
     this.f = 0;
     this.g = 0;
     this.h = 0;
+    this.neighbors = [];
 }
 
 
@@ -238,10 +252,28 @@ function aStarPath(startLtr, endLtr) {
     openSet.push(startLtr)
 
     while(openSet.length > 0) {
-        // continue searching for path
-        } else {
-            // no solution
+        
+        // Find nextNode from open Set
+        var nextNode = 0; // intialize openSet index location for nextNode in path
+        // continue searching for path to target
+        for (var i = 0; i < openSet.length; i++) {
+            if (openSet[i].f < openSet[nextNode].f ) {
+                nextNode = i;
+            }
         }
+        var currentLetter = openSet[nextNode]; // 
+
+        if (currentLetter == endLtr) {
+            console.log('End Letter found!')
+        }
+
+        removeFromArray(openSet, currentLetter) // remove current letter from OpenSet
+        closedSet.push(currentLetter);
+
+
+        
+
+    }
 
     /*
 
@@ -284,7 +316,10 @@ function aStarPath(startLtr, endLtr) {
 // console.log(testAdjacent('s','o'));
 
 // return all adjacent letters to a leter
-// console.log(adjacentLetters('e'));
+console.log('p');
+console.log(letterPosition('p'))
+console.log(adjacentLetters('p'));
+
 
 // Return the "grid" position of the letter 
 //console.log(letterPosition('A'));
