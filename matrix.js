@@ -29,7 +29,6 @@ const matrixKey =[
 /* GridKey is a list of objects, listing the letter and the [Row, Colum] array of each 
 of the letters of the alphanet. Z is [1,1], Q is [1, 3], M is [1, 7], P is [3, 10] */
 
-// TODO: Rewrite Gridkey to have O(n) access to both key and value pairs
 const gridKey = {
     'A' : [2, 1],
     'B' : [1, 5],
@@ -95,8 +94,8 @@ Test if two letters are adjacent
 // Convert letter into a number, a : 0, b: 1 ... z: 25
 function convertLetterToNum (letter) {
     if (typeof letter === 'string') {
-        let test = letter.toLowerCase(); // conver to lower case
-        return (test.charCodeAt(0) - 97)
+        let test = letter.toLowerCase(); // convert to lower case
+        return (test.charCodeAt(0) - 97) // 
     }
 }
 
@@ -113,18 +112,18 @@ function testAdjacent (letterA, letterB) {
 }
 
 // Returns list of letters adjacent to request letter
-function adjacentLetters (letterA) {
-    let numA = convertLetterToNum(letterA)
-    let adjacentKey = matrixKey[numA]; // Get matrix adjacent matrix for letterA
+function adjacentLetters (ltr) {
+    let numberLtr = convertLetterToNum(ltr)
+    let adjacentKey = matrixKey[numberLtr]; // Get matrix adjacent matrix for letterA
     /* Example: "s" returns
     [1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1,0, 1] */
     let letterArray = []
 
     // Generate array of numbers representing letters where adjacent
     for (let i = 0; i < adjacentKey.length; i++) {
-        if (adjacentKey[i] == 1) {
+        if (adjacentKey[i] == 1) { // If letter is ajdacent on keyboard
             // Convert index location to Unicode Letter, push to 
-            letterArray.push(String.fromCharCode(i + 97));
+            letterArray.push(String.fromCharCode(i + 97)); // return letter
         }
     }
     // Return 
@@ -147,7 +146,15 @@ function letterFromGridValue (x, y) {
     return outputLetter 
 }
 
-// Function that 
+/* Function that takes letters string inputs and 
+returns their distance away from each other from the letter keyboard
+*/
+function heuristic (a, b) {
+    let aGrid = letterPosition(a)
+    let bGrid = letterPosition(b)
+    let d = ((Math.abs(aGrid[0] - bGrid[0])) ** 2 + (Math.abs(aGrid[1] - bGrid[1]))** 2)
+    return d
+}
 
 testName = 'fred';
 
@@ -197,39 +204,64 @@ function testMoving (start, end) {
 }
 
 // Class Node
+function Spot () {
+    this.f = 0;
+    this.g = 0;
+    this.h = 0;
+}
 
 
-function aStarPath(start, end) {
+// A* seach function
+// startLtr and endLtr and both strings
+
+function aStarPath(startLtr, endLtr) {
+
+    // Algorithim Sources
     // https://www.geeksforgeeks.org/a-search-algorithm/
     // https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
     // https://www.youtube.com/watch?v=-L-WgKMFuhE&ab_channel=SebastianLague
+    // https://www.youtube.com/watch?v=aKYlikFAV4k&ab_channel=TheCodingTrain
 
     /* 
-        G cost = distance from the starting node
-        H cost (heuristic) = distance from end node
-        F cost = G cost + H cost
+    G cost = distance from the starting node
+    H cost (heuristic) = distance from end node
+    F cost = G cost + H cost
 
-        OPEN // the set of nodes to be evaluated
-        CLOSED / the set of nodes already evaluated
-        add the start node to the OPEN
+    OPEN // the set of nodes to be evaluated */
+    var openSet = [] 
+    var closedSet = [] 
 
-        loop
-            CURRENT = node in OPEN with the lowest f_cost
-            remove CURRENT from OPEN
-            add CURRENT to CLOSED
+    /* CLOSED / the set of nodes already evaluated
+    add the start node to the OPEN
 
-            if CURRENT is the target node // path has been found
-                return 
+    Intialize the openSet */
+    openSet.push(startLtr)
 
-            for each NEIGHBOR of the CURRENT node
-                if NEIGHBOR is not traversable OR NEIGHBOR is in CLOSED
-                    skip to to the next NEIGHBOR
+    while(openSet.length > 0) {
+        // continue searching for path
+        } else {
+            // no solution
+        }
 
-                if new path to NEIGHBOR is shorter OR NEIGHBOR is not in OPEN
-                    set f_cost OF NEIGHBOR
-                    set parent of NEIGHBOR to CURRENT
-                    if NEIGHBOR is not in OPEN
-                        add NEIGHBOR to OPEN
+    /*
+
+    loop
+        CURRENT = node in OPEN with the lowest f_cost (at begining this it the starting node)
+        remove CURRENT from OPEN
+        add CURRENT to CLOSED
+
+        if CURRENT is the target node // path has been found
+            return (exit out of the loop)
+
+        for each NEIGHBOR of the CURRENT node
+            if NEIGHBOR is not traversable OR NEIGHBOR is in CLOSED
+                skip to to the next NEIGHBOR
+
+            if new path to NEIGHBOR is shorter OR NEIGHBOR is not in OPEN
+                set f_cost OF NEIGHBOR
+                set parent of NEIGHBOR to CURRENT
+                if NEIGHBOR is not in OPEN
+                    add NEIGHBOR to OPEN
 
     */
 }
@@ -239,10 +271,13 @@ function aStarPath(start, end) {
 
 
 // Testing grid location of a letter
-console.log(letterPosition('a'));
+// console.log('S : ' + letterPosition('S'));
+// console.log('T : ' + letterPosition('T'));
+// console.log(heuristic('S','T'));
+
 
 // Test letter location to determine grid
-console.log(letterFromGridValue(2, 1))
+// console.log(letterFromGridValue(2, 1))
 
 // Testing moving path from one letter position to the other
 // testMoving('q', 'd');
@@ -257,7 +292,7 @@ console.log(letterFromGridValue(2, 1))
 // Test for value of letter given a coordinate
 // letterFromGridValue(2, 2);
 
-/* 
+/* Psuedo Code for A Star Alogritihm 
 Algorithm for finding adjacent keys
 
 For letters in the name (excluding last letter)
