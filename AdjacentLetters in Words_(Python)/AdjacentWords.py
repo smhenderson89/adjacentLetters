@@ -55,3 +55,16 @@ print('Input word')
 word = str(input()).lower()
 
 adjacent(word)
+
+#  def adjacent(word): Python Code
+#     for i in range(len(word)-1):  # Iterate over each letter of the word
+#         print('Checking letter ' + word[i] + '...', end='')
+#         findAdjacentKeys(letter[i])
+#         # Check if have reached end of the word
+#         if word[i+1] in adjacent_letters:   # If next letter in word is an adjacent key
+#             print('Yes, next letter is ' + word[i+1] + ' , '  + str(i))
+#             continue
+#         else:
+#             print('Sorry, ' + word[i+1]  + ' is not adjacent to ' + word[i])
+#             sys.exit(1)
+#     print('Congrats! "' + str(word) + '" has letters that are adjacent to each other in sequence!')

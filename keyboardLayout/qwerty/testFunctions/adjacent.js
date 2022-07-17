@@ -89,22 +89,3 @@ findAdjacentKeys('a');
 // Once found letter, track back to original letter the shortest path to find that letter 
 //  Could be C -> F -> G -> H or C -> V -> B -> H (both are 4 jumps)
 //  Could be S -> W -> Q or S -> A -> Q (both are 3 jumps)
-
-/* Code written in python
-
-
-
-/* def adjacent(word): Python Code
-    for i in range(len(word)-1):  # Iterate over each letter of the word
-        print('Checking letter ' + word[i] + '...', end='')
-        findAdjacentKeys(letter[i])
-        # Check if have reached end of the word
-        if word[i+1] in adjacent_letters:   # If next letter in word is an adjacent key
-            print('Yes, next letter is ' + word[i+1] + ' , '  + str(i))
-            continue
-        else:
-            print('Sorry, ' + word[i+1]  + ' is not adjacent to ' + word[i])
-            sys.exit(1)
-    print('Congrats! "' + str(word) + '" has letters that are adjacent to each other in sequence!')
-
-*/
