@@ -4,6 +4,39 @@
 
 // https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
 
+// CONSTANTS
+
+const alphaList = ['A','B','C','D','E','F','G','H', 'J','K','L','M',
+                   'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
+
+const adjacentLetters = {
+'Q': ['W', 'A', 'S'],
+'W': ['Q', 'E', 'A', 'S', 'D'],
+'E': ['W', 'R', 'S', 'D', 'F'],
+'R': ['E', 'T', 'D', 'F', 'G'],
+'T': ['R', 'Y', 'F', 'G', 'H'],
+'Y': ['T', 'U', 'G', 'H', 'J'],
+'U': ['Y', 'I', 'H', 'J', 'K'],      
+'I': ['U', 'O', 'J', 'K', 'L'],
+'O': ['I', 'P', 'K', 'L'],
+'P': ['O', 'L'],
+'A': ['Q', 'W', 'S', 'Z','X'],
+'S': ['Q', 'W', 'E', 'A', 'D', 'Z', 'X', 'C'],
+'D': ['W', 'E', 'R', 'S', 'F', 'X', 'C', 'V'],
+'F': ['E', 'R', 'T', 'D', 'G', 'C', 'V', 'B'],
+'G': ['R', 'T', 'Y', 'F', 'H', 'V', 'B', 'N'],
+'H': ['T', 'Y', 'U', 'G', 'J', 'B', 'N', 'M'],
+'J': ['Y', 'U', 'I', 'H', 'K', 'N', 'M'],             
+'K': ['U', 'I', 'O', 'J', 'L', 'M'],
+'L': ['I', 'O', 'P', 'K'],
+'Z': ['A', 'S', 'X'],
+'X': ['A', 'S', 'D', 'Z', 'C'],
+'C': ['S', 'D', 'F', 'X', 'V'],
+'V': ['D', 'F', 'G', 'C', 'B'],
+'B': ['F', 'G', 'H', 'V', 'N'], 
+'N': ['G', 'H', 'J', 'B', 'M'],
+'M': ['H', 'J', 'K', 'N']}
+
 const orthoMatrix = require ('./orthoAdjacentMatrix.json')
 
 const orthoLetterKey = {
@@ -62,25 +95,43 @@ const orthoRowColKey = {
     '1, 1' : 'Z'
 }
 
-const orthoRCMap = new Map()
-
-orthoRCMap.set('[2, 1]', 'A')
-
 // Class Node for letter
-function Spot (r, c) {
-    this.row = r;
-    this.col = c;
-    this.f = 0;
-    this.g = 0;
-    this.h = 0;
-    this.neighbors = [];
+class Node {
+    constructor(letter) {
+        this.letter = letter
+        // this.row = r;
+        // this.col = c;
+        this.f = 0;
+        this.g = 0;
+        this.h = 0;
+        this.neighbors = [];
+    }
 }
 
+// HELPER FUNCTIONS
+
+// Converts row, col intergers into letter
 function rowColToLetter(r,c) {
-    // console.log(r, c)
-    outputLetter = orthoRowColKey[`${r}, ${c}`]
-    // console.log(outputLetter)
+    outputLetter = orthoRowColKey[`${r}, ${c}`] // convert row/col input into string literal for array
     return outputLetter
 }
 
-console.log(rowColToLetter(2, 1))
+// Converts letter into it's row/col position for a Ortholinear Keyboard
+function letterToRowCol(letter) {
+    return orthoLetterKey[letter]
+}
+
+// Determine adjacent letters from Ortholinear keyboard layout
+function adjLetters(letter) {
+    return adjacentLetters[letter]
+}
+
+
+let A = new Node()
+
+console.log(A)
+
+
+
+
+
