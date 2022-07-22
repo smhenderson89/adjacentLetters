@@ -9,7 +9,7 @@
 const alphaList = ['A','B','C','D','E','F','G','H', 'J','K','L','M',
                    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
-const adjacentLetters = {
+const adjacentLettersObject = {
 'Q': ['W', 'A', 'S'],
 'W': ['Q', 'E', 'A', 'S', 'D'],
 'E': ['W', 'R', 'S', 'D', 'F'],
@@ -99,12 +99,17 @@ const orthoRowColKey = {
 class Node {
     constructor(letter) {
         this.letter = letter
-        // this.row = r;
-        // this.col = c;
+        
+        // Determine row/col location from letter
+        let cordinates = letterToRowCol('A')
+        this.row = cordinates[0];
+        this.col = cordinates[1];
         this.f = 0;
         this.g = 0;
         this.h = 0;
-        this.neighbors = [];
+
+        // Determine neighbors of letter based on node letter
+        this.neighbors = adjacentLetters(letter);
     }
 }
 
@@ -118,20 +123,38 @@ function rowColToLetter(r,c) {
 
 // Converts letter into it's row/col position for a Ortholinear Keyboard
 function letterToRowCol(letter) {
-    return orthoLetterKey[letter]
+    coordinates = orthoLetterKey[letter]
+    row = coordinates[0]
+    col = coordinates[1]
+    return [row, col]
 }
 
 // Determine adjacent letters from Ortholinear keyboard layout
-function adjLetters(letter) {
-    return adjacentLetters[letter]
+function adjacentLetters(letter) {
+    return adjacentLettersObject[letter]
 }
 
+/* Function that takes letters string inputs and 
+returns their distance away from each other from the letter keyboard
+*/
+function heuristic (a, b) {
+    let aGrid = letterToRowCol(a)
+    let bGrid = letterToRowCol(b)
+    let d = ((Math.abs(aGrid[0] - bGrid[0])) ** 2 + (Math.abs(aGrid[1] - bGrid[1]))** 2)
+    return d
+}
 
-let A = new Node()
-
-console.log(A)
+// TEST FUNCTIONS
 
 
+// Test NODE Functions
+letterA = new Node('A')
+console.log(letterA)
+
+// Test heuristic distance
+console.log('Grid position Z', letterToRowCol('Z'))
+console.log('Grid position P', letterToRowCol('P'))
+console.log(heuristic('Z', 'P'))
 
 
 
