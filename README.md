@@ -108,9 +108,9 @@ Github: [https://github.com/smhenderson89](https://github.com/smhenderson89)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Stuff Made Here Youtube channel for inspiration
-Peter Froud (github)
-Daniel Therman (github/contact)
+Stuff Made Here Youtube channel for inspiration <br />
+Peter Froud (github) <br />
+Daniel Therman (github/contact) <br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
