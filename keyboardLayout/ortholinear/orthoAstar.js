@@ -6,7 +6,7 @@
 
 // CONSTANTS
 
-const alphaList = ['A','B','C','D','E','F','G','H', 'J','K','L','M',
+const alphaList = ['A','B','C','D','E','F','G','H','I','J','K','L','M',
                    'N','O','P','Q','R','S','T','U','V','W','X','Y','Z']
 
 const adjacentLettersObject = {
@@ -60,6 +60,7 @@ const orthoLetterKey = {
     'R' : [3, 4],
     'S' : [2, 2],
     'T' : [3, 5],
+    'U' : [3, 7],
     'V' : [1, 4],
     'W' : [3, 2],
     'X' : [1, 2],
@@ -83,11 +84,12 @@ const orthoRowColKey = {
     '1, 7' : 'M',
     '1, 6' : 'N',
     '3, 9' : 'O',
-    '3, 10' : 'P',
+    '3, 10': 'P',
     '3, 1' : 'Q',
     '3, 4' : 'R',
     '2, 2' : 'S',
     '3, 5' : 'T',
+    '3, 7' : 'U', 
     '1, 4' : 'V',
     '3, 2' : 'W',
     '1, 2' : 'X',
@@ -95,18 +97,20 @@ const orthoRowColKey = {
     '1, 1' : 'Z'
 }
 
-// Class Node for letter
+// Class Node for letter, based on code from : https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
 class Node {
     constructor(letter) {
         this.letter = letter
         
         // Determine row/col location from letter
-        let cordinates = letterToRowCol('A')
-        this.row = cordinates[0];
-        this.col = cordinates[1];
+        let coordinates = letterToRowCol(letter)
+        this.row = coordinates[0];
+        this.col = coordinates[1];
+        this.parent = null // Need to lookup what this does
         this.f = 0;
         this.g = 0;
         this.h = 0;
+        this.debug = "";
 
         // Determine neighbors of letter based on node letter
         this.neighbors = adjacentLetters(letter);
@@ -135,7 +139,7 @@ function adjacentLetters(letter) {
 }
 
 /* Function that takes letters string inputs and 
-returns their distance away from each other from the letter keyboard
+returns their distance away from each other from the letter keyboard, squaring the distance
 */
 function heuristic (a, b) {
     let aGrid = letterToRowCol(a)
@@ -147,14 +151,15 @@ function heuristic (a, b) {
 // TEST FUNCTIONS
 
 
-// Test NODE Functions
-letterA = new Node('A')
-console.log(letterA)
+// INITIALIZE NODES
+/* Create a series of nodes for the entire keyboard. Each node will be named letterLETTER, where LETTER is each letter of the alpahbet. 
+Initalize each node depending on the location 
+*/
 
-// Test heuristic distance
-console.log('Grid position Z', letterToRowCol('Z'))
-console.log('Grid position P', letterToRowCol('P'))
-console.log(heuristic('Z', 'P'))
-
-
+letterNodes = new Map()
+for (let i = 0; i < alphaList.length; i++) {
+    varName = "letter" + alphaList[i]
+    varValue = new Node(alphaList[i])
+    letterNodes.set(varName, varValue)
+}
 
