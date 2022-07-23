@@ -109,7 +109,7 @@ Github: [https://github.com/smhenderson89](https://github.com/smhenderson89)
 ## Acknowledgments
 
 Stuff Made Here Youtube channel for inspiration <br />
-Peter Froud (github) <br />
+Peter Froud <br />
 Daniel Therman (github/contact) <br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
