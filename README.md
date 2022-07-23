@@ -38,7 +38,7 @@
 <!-- ABOUT THE PROJECT -->
 ## Project Inspiration
 
-![Alt text for basketball hoop gif](insert link for hoop gif)
+![Alt text for basketball hoop gif](https://github.com/smhenderson89/adjacentLetters/blob/main/robotic_basketball_hoop.gif)
 
 I was inspired from watching Stuff Made Here, a Youtube channel about a Maker who makes amazing projects, like a basketball hoop where you never miss (link multiple videos), or a robot that will cut your hair (videos)
 
@@ -108,9 +108,9 @@ Github: [https://github.com/smhenderson89](https://github.com/smhenderson89)
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Stuff Made Here Youtube channel for inspiration
-Peter Froud (github)
-Daniel Therman (github/contact)
+Stuff Made Here Youtube channel for inspiration <br />
+Peter Froud (github) <br />
+Daniel Therman (github/contact) <br />
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
