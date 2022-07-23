@@ -98,6 +98,7 @@ const orthoRowColKey = {
 }
 
 // Class Node for letter, based on code from : https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
+
 class Node {
     constructor(letter) {
         this.letter = letter
