@@ -99,7 +99,6 @@ const orthoRowColKey = {
 
 // Class Node for letter, based on code from : https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/
 
-
 class Node {
     constructor(letter) {
         this.letter = letter
@@ -150,6 +149,12 @@ function heuristic (a, b) {
     return d
 }
 
+// TODO: CREATE FUNCTION TO TAKE STRING LETTER INPUT, RETURN POINTER TO THE LETTER NODE CLASS
+/* use a string of a letter, return pointer(?) to the Class node of a letter - IP*/
+function letterToNode(letter) {
+    // IN PROGRESS
+}
+
 // TEST FUNCTIONS
 
 
@@ -163,5 +168,40 @@ for (let i = 0; i < alphaList.length; i++) {
     varName = "letter" + alphaList[i]
     varValue = new Node(alphaList[i])
     letterNodes.set(varName, varValue)
+}
+
+// TODO: FUNCTION TO UPDATE A NODE CLASS VALUE WITHOUT DELETING THE RET OF THE ATTRIBUTES
+// Update Node A VALUE -  
+
+letterNodes.set('letterA', ('f', 5))
+console.log(letterNodes)
+
+
+
+// ALGORITHM
+
+// High Level PseduoCode for A star aglorithm (link: https://briangrinstead.com/blog/astar-search-algorithm-in-javascript/)
+
+function orthoAstar(start, end) {
+    var openlist = []
+    var closedList = []
+    var startLetter = start.toUpperCase()
+    var endLetter = end.toUpperCase()
+
+    //push startNode onto openList
+    //while(openList is not empty) {
+    //currentNode = find lowest f in openList
+    //if currentNode is final, return the successful path
+    //push currentNode onto closedList and remove from openList
+    //foreach neighbor of currentNode {
+        //if neighbor is not in openList {
+            //save g, h, and f then save the current parent
+            //add neighbor to openList
+        //}
+        //if neighbor is in openList but the current g is better than previous g {
+            //save g and f, then save the current parent
+        //}
+    //}
+
 }
 
